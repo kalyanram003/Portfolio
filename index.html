@@ -265,7 +265,7 @@
 												</div>
 												<!-- Button -->
 												<div class="col-12 text-center">
-													<button onclick="handleformsubmission()" name="submit" id="submitButton" class="btn btn-secondary ct_btn" title="Submit Your Message!">Send Message</button>
+													<button onclick="handleformsubmission(event)" name="submit" id="submitButton" class="btn btn-secondary ct_btn" title="Submit Your Message!">Send Message</button>
 												</div>
 											</div>
 										</div>
@@ -336,18 +336,59 @@
 		<script src="assets/js/form-contact.js"></script>
 		<script src="assets/js/main.js"></script>
 		
-	</body>
-	<script>
-		const handleformsubmission = ()=>{
-			const name = document.getElementById("form-name").value;
-			const email = document.getElementById("form-email").value;
-			const subject = document.getElementById("form-subject").value;
-			const message = document.getElementById("form-message").value;
-			if (name && email && subject && message){
-				window.alert("Details are submitted 🚀");
-			}else{
-				window.alert("Fill all the required feilds 🚀");
+		<!-- Add EmailJS SDK -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script type="text/javascript" src="config.js"></script>
+		<script type="text/javascript">
+			(function() {
+				emailjs.init(emailConfig.publicKey);
+			})();
+		</script>
+		
+		<script>
+			const handleformsubmission = (e) => {
+				e.preventDefault();
+				const name = document.getElementById("form-name").value;
+				const email = document.getElementById("form-email").value;
+				const subject = document.getElementById("form-subject").value;
+				const message = document.getElementById("form-message").value;
+				
+				if (name && email && subject && message) {
+					// Show loading state
+					const submitButton = document.getElementById("submitButton");
+					submitButton.disabled = true;
+					submitButton.innerHTML = "Sending...";
+					
+					// Prepare the template parameters
+					const templateParams = {
+						from_name: name,
+						from_email: email,
+						subject: subject,
+						message: message
+					};
+					
+					// Send the email using EmailJS
+					emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams)
+						.then(function(response) {
+							window.alert("Message sent successfully! 🚀");
+							// Clear the form
+							document.getElementById("form-name").value = "";
+							document.getElementById("form-email").value = "";
+							document.getElementById("form-subject").value = "";
+							document.getElementById("form-message").value = "";
+						}, function(error) {
+							window.alert("Failed to send message. Please try again. ❌");
+							console.error("Error:", error);
+						})
+						.finally(() => {
+							// Reset button state
+							submitButton.disabled = false;
+							submitButton.innerHTML = "Send Message";
+						});
+				} else {
+					window.alert("Please fill all the required fields 🚀");
+				}
 			}
-		}
-	</script>
+		</script>
+	</body>
 </html>
