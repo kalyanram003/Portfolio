@@ -63,6 +63,23 @@
 			.blog-info p {
 				flex: 1;
 			}
+			.profile-image {
+				width: 100%;
+				max-width: 400px;
+				height: auto;
+				border-radius: 20px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease;
+			}
+			.profile-image:hover {
+				transform: scale(1.02);
+			}
+			.banner-images {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 20px;
+			}
 		</style>
 					
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -128,7 +145,7 @@
 						</div>
 						<div class="col-lg-6 col-md-6">
 							<div class="banner-images">
-								<img src="./assets/img/portfolio-Photoroom.png" alt="Image-Master" style="width: 270px; margin-left: 150px;"/>
+								<img src="./assets/img/portfolio-Photoroom.png" alt="Kalyan Ram" class="profile-image"/>
 							</div>
 						</div>
 					</div>
