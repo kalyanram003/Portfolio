@@ -1068,3 +1068,188 @@ Start FunFacts CSS
 /* ==========================================================================
 11. End Footer Area
 ========================================================================== */
+
+/* Achievements Section */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.achievement-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.achievement-card:hover .achievement-icon {
+    transform: scale(1.2);
+}
+
+.achievement-content {
+    position: relative;
+    z-index: 1;
+}
+
+.achievement-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.achievement-content p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.achievement-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+}
+
+.stat {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Badges Container */
+.badges-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.badge-card {
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.badge-card:hover {
+    transform: translateX(5px);
+}
+
+.badge-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.badge-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.badge-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.badge-title {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.badge-level {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.badge-stars {
+    color: #ffd700;
+    font-size: 0.9rem;
+}
+
+/* DSA Problem Solving Image Hover Effect */
+.achievement-card[data-image] {
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-card[data-image]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--hover-image);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.achievement-card[data-image]:hover::before {
+    opacity: 1;
+}
+
+.achievement-card[data-image] .achievement-content,
+.achievement-card[data-image] .achievement-icon,
+.achievement-card[data-image] .achievement-stats,
+.achievement-card[data-image] .badges-container {
+    position: relative;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-card[data-image]:hover .achievement-content,
+.achievement-card[data-image]:hover .achievement-icon,
+.achievement-card[data-image]:hover .achievement-stats,
+.achievement-card[data-image]:hover .badges-container {
+    opacity: 0;
+}
+
+/* Set the background images for each card */
+.achievement-card[data-image="./assets/img/solved.png"] {
+    --hover-image: url('../img/solved.png');
+}
+
+.achievement-card[data-image="./assets/img/leetcode.png"] {
+    --hover-image: url('../img/leetcode.png');
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+    
+    .achievement-card {
+        padding: 1.5rem;
+    }
+}
